@@ -15,6 +15,12 @@ export default class Question extends React.Component {
         unlockSubmit: false
     };
 
+    static getDerivedStateFromProps(props) {
+        return {
+            selectedOption: props.question.answer ? props.question.answer : ''
+        }
+    }
+
     handleSubmitSwitch = (event) => {
         this.setState({ unlockSubmit: event.target.checked })
     }
@@ -22,14 +28,13 @@ export default class Question extends React.Component {
 
 
     render() {
-        console.log(this.props, 'length')
-        const { qid, description, questionOptions, answer: selectedOption } = this.props.question;
+        const { qid, description, questionOptions } = this.props.question;
         return (
             <div>
                 <div><Paper style={{ margin: '20px', padding: '20px' }}><p>{qid}. {description}</p></Paper></div>
                 <div><Paper style={{ margin: '20px', padding: '20px' }}>
                     <FormControl component="fieldset" >
-                        <div><RadioGroup aria-label="options" name="options" value={selectedOption !== '' ? selectedOption : ''} onChange={(event) => this.props.optionChange(event.target.value, qid)}>
+                        <div><RadioGroup aria-label="options" name="options" value={this.state.selectedOption === '' ? '' : this.state.selectedOption} onChange={(event) => {console.log(this.state.selectedOption);this.props.optionChange(event.target.value, qid)}}>
                             {
                                 questionOptions.length > 0 && questionOptions.map(option => {
                                     return <FormControlLabel key={option} value={option} control={<Radio />} label={option} />
@@ -43,8 +48,8 @@ export default class Question extends React.Component {
                         <Button variant="contained" color="primary" disabled={qid === 1} onClick={this.props.previousQuestion}>
                             Previous
                 </Button>
-                        <Button style={{ marginLeft: '20px' }} variant="contained" color="primary" disabled={(selectedOption === undefined) || (qid == this.props.questionsLength)} onClick={() => this.props.nextQuestion()} >
-                            Next
+                        <Button style={{ marginLeft: '20px' }} variant="contained" color="primary" disabled={(qid === this.props.questionsLength)} onClick={() => this.props.nextQuestion()} >
+                            {(qid === this.props.questionsLength) ? 'You\'ve reached the last question' : 'Next'}
                 </Button>
                         <FormControlLabel style={{ marginLeft: '20px' }}
                             control={

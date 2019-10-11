@@ -55,7 +55,7 @@ function App() {
           <AppBar position="static">
             <Toolbar>
               <Typography variant="h5" className={classes.title}>
-                <Link to="/">Inc-Exam</Link>
+                <Link to="/">J-Exam</Link>
               </Typography>
               {
                 /* isAuthenticatedFunc() && <div style={{ cursor: 'pointer' }} onClick={logout}>Logout</div> */

@@ -16,7 +16,8 @@ export default class QuestionPaper extends React.Component {
         eid: '',
         showProgress: false,
         hasPreviousResult: false,
-        previousResult: {}
+        previousResult: {},
+        showSnackbar: true
     }
 
     async componentDidMount() {
@@ -114,7 +115,6 @@ export default class QuestionPaper extends React.Component {
                         <Button onClick={this.deletePreviousResult} style={{ marginLeft: '10px' }} variant="contained" color="primary">Rewrite exam</Button>
                     </div>
                 }
-
             </div>
 
         )
