@@ -17,7 +17,6 @@ class Landing extends React.Component {
     }
 
     setExamId = (examId) => {
-        console.log(examId);
         localStorage.setItem('incExamEid', examId);
         this.setState({ canRedirect: true });
     }

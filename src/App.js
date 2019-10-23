@@ -12,7 +12,9 @@ import TestsLanding from './components/testsLanding';
 import CreateExam from './components/createExam';
 import Home from './components/home';
 import UserLanding from './components/userLanding';
+import ViewExams from './components/viewExams';
 import Result from './containers/result';
+import AdminPage from './components/admin';
 import Results from './components/results';
 import NotGenuine from './components/notGenuine';
 import Config from './config';
@@ -71,6 +73,8 @@ function App() {
           <Route path="/userLanding/:userName" render={() => isAuthenticatedFunc() ? <UserLanding /> : <NotGenuine />} />
           <Route path="/result" exact render={() => isAuthenticatedFunc() ? <Result /> : <NotGenuine />} />
           <Route path="/results" exact render={() => isAuthenticatedFunc() ? <Results /> : <NotGenuine />} />
+          <Route path="/admin" exact render={() => isAuthenticatedFunc() ? <AdminPage /> : <NotGenuine />} />
+          <Route path="/viewExams" exact render={() => isAuthenticatedFunc() ? <ViewExams /> : <NotGenuine />} />
         </Router>
       </div>
     </Provider>
