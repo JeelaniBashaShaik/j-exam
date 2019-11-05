@@ -1,0 +1,14 @@
+
+#registration, #login {
+    width: 90%;
+}
+#registerPaper {
+    margin: 0px;
+    padding: 0px;
+}
+
+#registerForm,#loginForm {
+    display: flex;
+    justify-content: center;
+    height: auto;
+}

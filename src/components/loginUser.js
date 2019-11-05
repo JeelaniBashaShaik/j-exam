@@ -6,6 +6,10 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import { RemoveRedEye } from '@material-ui/icons';
+import './register.css';
+import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
 import Config from './../config';
 
 const LoginUser = () => {
@@ -34,9 +38,9 @@ const LoginUser = () => {
     }
     return (
         <div>
-            <Paper style={{ margin: '40px', padding: '20px' }}>
-                <h3>Login</h3>
-                <div>
+            <Paper id="loginPaper">
+                <div id="loginForm">
+                <div id="login">
                     <TextField
                         id="userName"
                         label="User Name"
@@ -44,20 +48,27 @@ const LoginUser = () => {
                         onChange={(event) => setCredentials({ ...credentials, userName: event.target.value })}
                         margin="normal"
                         fullWidth
-                        style={{ marginTop: '0px' }}
+                        style={{ marginTop: '15px' }}
                     />
-                    <span><TextField
+                    <div style={{display:'grid', gridTemplateColumns:'90% 10%'}}><TextField
                         id="pwd-login"
                         label="Password"
                         value={credentials.password}
                         onChange={(event) => setCredentials({ ...credentials, password: event.target.value })}
                         margin="normal"
                         type="password"
-                        style={{ marginTop: '0px', width: '65%' }}
-                    /><Button style={{ marginTop: '10px', marginLeft: '10px' }} disabled={credentials.password === ''} onClick={showPassword} variant="contained" color="primary">Show Password</Button></span>
+                        style={{ marginTop: '0px', width: '100%' }}
+                    />
+                     <IconButton disabled={credentials.password === ''} onClick={showPassword}>
+                        <RemoveRedEye />
+                    </IconButton>
+                    </div>
+                    <div style={{marginTop:'15px',marginBottom:'20px', textAlign:'center'}}>
                     <Button style={{ marginLeft: '0px' }} disabled={credentials.userName === '' || credentials.password === ''} variant="contained" color="primary" onClick={loginClicked}>
                         Login
                 </Button>
+                </div>
+                </div>
                 </div>
             </Paper>
             {credentials.canRedirect && <Redirect to={`/userLanding/${credentials.userName}`} />}
@@ -72,6 +83,7 @@ const LoginUser = () => {
             >
                 <SnackbarContent aria-describedby="client-snackbar" style={{ backgroundColor: snackBar.snackBarColor }} message={snackBar.snackBarMessage} />
             </Snackbar>
+            
         </div>
     )
 }

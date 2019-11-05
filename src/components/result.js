@@ -32,7 +32,7 @@ export default class Result extends React.Component {
             legend: {
                 orient: 'vertical',
                 x: 'right',
-                data: ['Correct %', 'Wrong %']
+                data: ['Wrong %', 'Correct %']
             },
             calculable: true,
             series: [
@@ -42,8 +42,8 @@ export default class Result extends React.Component {
                     radius: '55%',
                     center: ['50%', '60%'],
                     data: [
-                        { value: this.state.correctPercent, name: 'Correct %' },
-                        { value: this.state.wrongPercent, name: 'Wrong %' }
+                        { value: this.state.wrongPercent, name: 'Wrong %', itemStyle: {color: 'red'} },
+                        { value: this.state.correctPercent, name: 'Correct %', itemStyle: {color: 'green'} }
                     ]
                 }
             ]
@@ -54,7 +54,7 @@ export default class Result extends React.Component {
     async componentDidMount() {
         let requestBody = { userName: localStorage.getItem('incExamUserName'), eid: localStorage.getItem('incExamEid') }
         const { data } = await Axios.post(`${Config.baseUrl}/result/fetchResult`, requestBody);
-        this.setState({ finalResult: data.payload[0].finalResult, correctPercent: data.payload[0].correctCount, wrongPercent: data.payload[0].wrongCount, correctCount: data.payload[0].correctCount, wrongCount: data.payload[0].wrongCount });
+        this.setState({ userName:data.payload[0].userName, description:data.payload[0].description ,finalResult: data.payload[0].finalResult, correctPercent: data.payload[0].correctCount, wrongPercent: data.payload[0].wrongCount, correctCount: data.payload[0].correctCount, wrongCount: data.payload[0].wrongCount, totalCount: data.payload[0].correctCount + data.payload[0].wrongCount });
     }
 
     render() {
@@ -64,16 +64,25 @@ export default class Result extends React.Component {
 
                 <div style={{ height: '80vh', width: '100%', display: 'grid', padding: '20px', boxSizing: 'border-box', gridTemplateColumns: '40% 59%', gridGap: '1%' }}>
                     <Paper style={{ padding: '20px' }}>
-                        <div>
+                        <div style={{display:'flex', justifyContent: 'space-between'}}>
+                            <div>
                             {this.state.userName && <p>User Name: {this.state.userName}</p>}
                             {this.state.eid && <p>Exam Id: {this.state.eid}</p>}
                             {this.state.description && <p>Exam Description: {this.state.description}</p>}
                             {this.state.correctCount && <p>Correct Count: {this.state.correctCount}</p>}
                             {this.state.wrongCount && <p>Wrong Count: {this.state.wrongCount}</p>}
                             {this.state.totalCount && <p>Total Questions: {this.state.totalCount}</p>}
-                            {this.state.totalCount && <p style={{ color: `${percentage >= 60 ? 'green' : percentage < 60 ? 'red' : 'black'}` }}>Percentage: <strong>{percentage}  %</strong></p>}
-                            <hr />
+                            </div>
+                            <div>
+                                {this.state.totalCount && <div>
+                                    <p>Percentage</p>
+                                    <div style={{fontSize:'48px', fontWeight:100, color: `${percentage >= 60 ? 'green' : percentage < 60 ? 'red' : 'black'}` }}>{percentage}  %</div>
+                                </div>}
+                            </div>
+                            
+                            
                         </div>
+                        <hr />
                         <ReactEcharts option={this.getOption()} />
                     </Paper>
                     <Paper style={{ padding: '20px' }}>

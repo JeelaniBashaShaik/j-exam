@@ -1,0 +1,54 @@
+@media screen and (min-width: 760px) {
+    #homepage {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        padding: 20px;
+    }
+    #homepageImage {
+        
+    }
+
+    #homePaper {
+        margin: 40px;
+        padding: 20px;
+        width:70%;
+        height: 60vh;
+    }
+}
+
+@media screen and (min-width:600px) and (max-width: 760px) {
+    #homepage {
+        display: grid;
+        grid-template-columns: 30% 70%;
+        padding: 20px;
+    }
+    #homepageImage {
+        
+    }
+
+    #homePaper {
+        margin: 40px;
+        padding: 20px;
+        width:70%;
+        height: 60vh;
+    }
+}
+
+@media screen and (max-width:600px) {
+    #homepage {
+        display: grid;
+        grid-template-columns: 100%;
+        padding: 20px;
+    }
+    #homepageImage {
+        display: none;
+    }
+
+    #homePaper {
+        margin: 20px;
+        padding: 10px;
+        width:70%;
+        height: 60vh;
+    }
+}
+

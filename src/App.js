@@ -19,6 +19,7 @@ import Results from './components/results';
 import NotGenuine from './components/notGenuine';
 import Config from './config';
 import jwt from 'jsonwebtoken';
+import CompletedExams from './components/completedExams';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -75,6 +76,7 @@ function App() {
           <Route path="/results" exact render={() => isAuthenticatedFunc() ? <Results /> : <NotGenuine />} />
           <Route path="/admin" exact render={() => isAuthenticatedFunc() ? <AdminPage /> : <NotGenuine />} />
           <Route path="/viewExams" exact render={() => isAuthenticatedFunc() ? <ViewExams /> : <NotGenuine />} />
+          <Route path="/completedExams" exact render={() => isAuthenticatedFunc() ? <CompletedExams /> : <NotGenuine />} />
         </Router>
       </div>
     </Provider>
